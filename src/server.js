@@ -40,24 +40,32 @@ const withDB = async (operations, res) => {
   }
 };
 
+const query = async (db, sql, params) => {
+  if (!params) {
+    params = [];
+  }
+
+  return await new Promise((resolve, reject) => {
+    db.query(sql, params, (err, res) => {
+      if (err) {
+        console.log(err);
+        reject(err);
+      }
+      else {
+        console.log(res);
+        resolve(res);
+      }
+    });
+  });
+}
+
 app.get('/api/articles', async (req, res) => {
   withDB(async (db) => {
-    const articleInfo = await new Promise((resolve, reject) => {
-      const sql = `
+    const sql = `
       SELECT a.id, a.name, a.title, a.upvotes
       FROM articles a;`;
-      
-      db.query(sql, (err, res) => {
-        if (err) {
-          console.log(err);
-          reject(err);
-        }
-        else {
-          console.log(res);
-          resolve(res);
-        }
-      });
-    });
+
+    const articleInfo = await query(db, sql);
     
     res.status(200).json(articleInfo);
   }, res);  
@@ -67,25 +75,13 @@ app.get('/api/articles', async (req, res) => {
 app.get('/api/articles/:name', async (req, res) => {
   withDB(async (db) => {
     const articleName = req.params.name;
-
-    const articleInfo = await new Promise((resolve, reject) => {
-      const sql = `
+    const sql = `
         SELECT a.id, a.name, a.title, a.upvotes
         FROM articles a
         WHERE a.name = ?`;
-      const params = [articleName];
-      
-      db.query(sql, params, (err, res) => {
-        if (err) {
-          console.log(err);
-          reject(err);
-        }
-        else {
-          console.log(res);
-          resolve(res);
-        }
-      })
-    })
+    const params = [articleName];
+
+    const articleInfo = await query(db, sql, params);
 
     res.status(200).json(articleInfo);
   }, res);
@@ -96,15 +92,21 @@ app.get('/api/articles/:name', async (req, res) => {
 app.post('/api/articles/:name/upvote', async (req, res) => {
   withDB( async (db) => {
     const articleName = req.params.name;
+    const sql1 = `
+      UPDATE articles a
+      SET a.upvotes = (a.upvotes + 1)
+      WHERE a.name = ?`;
+    const params1 = [articleName];
 
-    const articleInfo = await db.collection('articles').findOne({ name: articleName });
-    await db.collection('articles').updateOne({ name: articleName }, {
-      '$set': {
-        upvotes: articleInfo.upvotes + 1,
-      },
-    });
+    await query(db, sql1, params1);
+
+    const sql2 = `
+      SELECT a.id, a.name, a.title, a.upvotes
+      FROM articles a
+      WHERE a.name = ?`;
+    const params2 = [articleName];
   
-    const updatedArticleInfo = await db.collection('articles').findOne({ name: articleName });
+    const updatedArticleInfo = await query(db, sql2, params2);
   
     res.status(200).json(updatedArticleInfo);
   }, res);
@@ -113,17 +115,23 @@ app.post('/api/articles/:name/upvote', async (req, res) => {
 });
 
 app.post('/api/articles/:name/add-comment', (req, res) => {
-  const { username, text } = req.body;
+  const username = req.body.username;
+  const comment = req.body.text;
   const articleName = req.params.name;
   
   withDB(async (db) => {
-    const articleInfo = await db.collection('articles').findOne({ name: articleName });
-    await db.collection('articles').updateOne({ name: articleName }, {
-      '$set': {
-        comments: articleInfo.comments.concat({ userName, text }),
-      },
-    });
-    const updatedArticleInfo = await db.collection('articles').findOne({ name: articleName });
+    const sql1 = `
+      SELECT a.id
+      FROM articles a
+      WHERE a.name = ?`;
+    const params1 = [articleName];
+    const articleInfo = await query(db, sql1, params1);
+
+    const sql2 = `
+      INSERT INTO comments (username, comment, articleID)
+      VALUES (?, ?, ?);`;
+    const params2 = [username, comment, articleInfo[0].id];
+    const updatedArticleInfo = await query(db, sql2, params2);
 
     res.status(200).json(updatedArticleInfo);
   }, res);
