@@ -1,6 +1,9 @@
 import mysql from 'mysql';
+import ErrorHandler from './error/ErrorHandler';
 
 const withDB = async (operations, res) => {
+  const errorHandler = new ErrorHandler();
+
   try {
     const conn = mysql.createConnection({
       user             : 'root',
@@ -24,11 +27,11 @@ const withDB = async (operations, res) => {
     })
 
     await operations(db);
-    
+
     conn.end();
   }
   catch (error) {
-    res.status(500).json({ message: 'Error connecting to db', error});
+    errorHandler.handleErrors(error, res);
   }
 };
 
