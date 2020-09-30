@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
-import query from './util/query';
 import withDB from './util/withDB';
 import ArticlesDao from './dao/ArticlesDao';
 
@@ -29,8 +28,6 @@ app.get('/api/articles/:name', async (req, res) => {
 
     res.status(200).json(articleInfo);
   }, res);
-
-
 });
 
 app.post('/api/articles/:name/upvote', async (req, res) => {
