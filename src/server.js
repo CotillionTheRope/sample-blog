@@ -43,8 +43,8 @@ app.post('/api/articles/:name/upvote', async (req, res) => {
 });
 
 app.post('/api/articles/:name/add-comment', (req, res) => {
-  const username = req.body.username;
-  const comment = req.body.text;
+  const username    = req.body.username;
+  const comment     = req.body.text;
   const articleName = req.params.name;
 
   withDB(async (db) => {
@@ -54,8 +54,8 @@ app.post('/api/articles/:name/add-comment', (req, res) => {
   }, res);
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname + '/build/index.html'));
+// });
 
 app.listen(8000, () => console.log('Listening on port 8000'));

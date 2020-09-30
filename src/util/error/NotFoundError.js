@@ -7,10 +7,10 @@ class NotFoundError extends Error {
     }
 
 
-    this.name = 'NotFoundError';
-    this.field = field ? field : '';
+    this.name    = 'NotFoundError';
+    this.field   = field ? field : '';
     this.message = 'Not Found';
-    this.type='NotFound';
+    this.type    = 'NotFound';
   }
 }
 
