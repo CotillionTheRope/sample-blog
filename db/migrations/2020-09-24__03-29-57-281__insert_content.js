@@ -11,8 +11,8 @@ module.exports = {
 
     const sql1 = `
       INSERT INTO content (articleID, contentOrder, content)
-      SELECT a.id, 1, 'Welcome! Today we're going to be talking about the fastest way to learn React.
-      We'll be discussing some topics such as proin congue ligula id risus posuere, vel eleifend ex egestas.
+      SELECT a.id, 1, 'Welcome! Today we''re going to be talking about the fastest way to learn React.
+      We''ll be discussing some topics such as proin congue ligula id risus posuere, vel eleifend ex egestas.
       Sed in turpis leo. Aliquam malesuada in massa tincidunt egestas. Nam consectetur varius turpis, non porta
       arcu porttitor non. In tincidunt vulputate nulla quis egestas. Ut eleifend ut ipsum non fringilla. Praesent
       imperdiet nulla nec est luctus, at sodales purus euismod.'
@@ -52,8 +52,8 @@ module.exports = {
 
     const sql4 = `
       INSERT INTO content (articleID, contentOrder, content)
-      SELECT a.id, 1, 'In this article, we're going to be talking looking at a very quick way to set up a Node.js server.
-      We'll be discussing some topics such as proin congue ligula id risus posuere, vel eleifend ex egestas. Sed in turpis leo.
+      SELECT a.id, 1, 'In this article, we''re going to be talking looking at a very quick way to set up a Node.js server.
+      We''ll be discussing some topics such as proin congue ligula id risus posuere, vel eleifend ex egestas. Sed in turpis leo.
       Aliquam malesuada in massa tincidunt egestas. Nam consectetur varius turpis, non porta arcu porttitor non. In tincidunt
       vulputate nulla quis egestas. Ut eleifend ut ipsum non fringilla. Praesent imperdiet nulla nec est luctus, at sodales purus euismod.'
       FROM articles a
@@ -92,7 +92,7 @@ module.exports = {
 
     const sql7 = `
       INSERT INTO content (articleID, contentOrder, content)
-      SELECT a.id, 1, 'Today is the day I talk about something which scares most people: resumes. In reality, I'm not sure why
+      SELECT a.id, 1, 'Today is the day I talk about something which scares most people: resumes. In reality, I''m not sure why
       people have such a hard time with proin congue ligula id risus posuere, vel eleifend ex egestas. Sed in turpis leo.
       Aliquam malesuada in massa tincidunt egestas. Nam consectetur varius turpis, non porta arcu porttitor non. In tincidunt
       vulputate nulla quis egestas. Ut eleifend ut ipsum non fringilla. Praesent imperdiet nulla nec est luctus, at sodales purus euismod.'
