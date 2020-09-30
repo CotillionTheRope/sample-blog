@@ -11,7 +11,7 @@ module.exports = {
 
 
     const sql1 = `
-      INSERT INTO artices (name, upvotes, title)
+      INSERT INTO articles (name, upvotes, title)
       VALUES ('learn-react', 0,	'The Fastest Way to Learn React');`
 
     console.log(sql1);
@@ -19,7 +19,7 @@ module.exports = {
     await executer.query(sql1, params);
 
     const sql2 = `
-      INSERT INTO artices (name, upvotes, title)
+      INSERT INTO articles (name, upvotes, title)
       VALUES ('learn-node', 0, 'How to Build a Node Server in 10 Minutes');`
 
     console.log(sql2);
@@ -27,7 +27,7 @@ module.exports = {
     await executer.query(sql2, params);
 
     const sql3 = `
-      INSERT INTO artices (name, upvotes, title)
+      INSERT INTO articles (name, upvotes, title)
       VALUES ('my-thoughts-on-resumes', 0, 'My Thoughts on Resumes');`;
 
     console.log(sql3);
