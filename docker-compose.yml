@@ -10,12 +10,13 @@ services:
     volumes:
       - percona-data:/var/lib/mysql
 
-  dev-backend:
+  dev:
     image: dacheson/sample-blog-dev:latest
     env_file:
       - docker/env/sample-blog-dev.env
     ports:
       - "8000:8000"
+      - "3000:3000"
     volumes:
       - .:/home/node/dev
     stdin_open: true
