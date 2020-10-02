@@ -40,7 +40,7 @@ class ArticlesDao {
   }
 
   async addUpvote(db, articleName) {
-    const articleInfo = this.retrieveByName(db, articleName);
+    const articleInfo = await this.retrieveByName(db, articleName);
 
     const sql = `
       UPDATE articles a
@@ -50,6 +50,7 @@ class ArticlesDao {
 
     await query(db, sql, params);
 
+    console.log('added vote');
     const updatedInfo = await this.retrieveByName(db, articleName);
 
     return updatedInfo;
@@ -61,7 +62,7 @@ class ArticlesDao {
       INSERT INTO comments (username, comment, articleID)
       VALUES (?, ?, ?);`;
 
-    const params = [username, comment, articleInfo[0].id];
+    const params = [username, comment, articleInfo.id];
     await query(db, sql, params);
 
     const updatedArticleInfo = await this.retrieveByName(db, articleName);

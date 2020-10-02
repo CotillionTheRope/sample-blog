@@ -7,7 +7,7 @@ class ErrorHandler {
         break;
 
       default:
-        res.status(500).json({message: 'Error executing database operation'});
+        res.status(500).json({message: 'Error executing database operation', error: err});
     }
   }
 }
