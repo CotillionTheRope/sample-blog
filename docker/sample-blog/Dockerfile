@@ -31,4 +31,4 @@ RUN npm install -g forever && \
 USER node
 
 EXPOSE 3000
-CMD cd api && forever start -c "npm start" .
+CMD cd api && forever --minUptime 1000 --spinSleepTime 1000 start -c "npm start" .
