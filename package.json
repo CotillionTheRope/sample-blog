@@ -15,9 +15,11 @@
     "whatwg-fetch": "^3.4.1"
   },
   "scripts": {
-    "client": "npm start",
+    "dev-client": "npm start",
+    "client": "serve -s build -l 3000",
     "server": "cd api && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server\" \"npm run dev-client\"",
+    "prod": "concurrently \"npm run server\" \"npm run client\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
