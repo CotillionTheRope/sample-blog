@@ -20,15 +20,14 @@ FROM node:dubnium-alpine
 WORKDIR /var/www/sample-blog
 
 # Copy the production assets
+COPY --from=build ["src/api/", "."]
 COPY --from=build ["src/build/", "build/"]
-COPY --from=build ["src/api/", "api/"]
 
 RUN npm install -g forever && \
-    cd api && \
     npm install
 
 # The application runs under the node user.
 USER node
 
 EXPOSE 3000
-CMD cd api && forever --minUptime 1000 --spinSleepTime 1000 start -c "npm start" .
+CMD forever --minUptime 1000 --spinSleepTime 1000 start -c "npm start" .
