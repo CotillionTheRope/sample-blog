@@ -11,7 +11,7 @@ const ArticlePage = ({ match }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch(`http://localhost:8000/api/articles/${name}`);
+      const result = await fetch(`/api/articles/${name}`);
       const body = await result.json();
       if(body.id) {
         // If there is an ID then the article was found
