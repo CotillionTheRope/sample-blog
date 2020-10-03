@@ -21,7 +21,7 @@ WORKDIR /var/www/sample-blog
 
 # Copy the production assets
 COPY --from=build ["src/api/", "."]
-COPY --from=build ["src/build/", "build/"]
+COPY --from=build ["src/build/", "./src/build/"]
 
 RUN npm install -g forever && \
     npm install
@@ -29,5 +29,5 @@ RUN npm install -g forever && \
 # The application runs under the node user.
 USER node
 
-EXPOSE 3000
-CMD forever --minUptime 1000 --spinSleepTime 1000 start -c "npm start" .
+EXPOSE 8000
+CMD forever --minUptime 1000 --spinSleepTime 1000 -c "npm start" .
