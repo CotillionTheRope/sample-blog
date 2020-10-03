@@ -5,7 +5,7 @@ const AddCommentForm = ({ articleName, setArticleInfo }) => {
   const [commentText, setCommentText] = useState('');
 
   const addComment = async () => {
-    const result = await fetch(`/api/articles/${articleName}/add-comment`, {
+    const result = await fetch(`http://localhost:8000/api/articles/${articleName}/add-comment`, {
       method: 'POST',
       body: JSON.stringify({ username, text: commentText }),
       headers: {

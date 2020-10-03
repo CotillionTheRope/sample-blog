@@ -6,7 +6,7 @@ const ArticlesListPage = () =>{
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch(`/api/articles/`);
+      const result = await fetch(`http://localhost:8000/api/articles/`);
       const body = await result.json();
       console.log(body);
       setArticles(body);
