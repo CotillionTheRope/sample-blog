@@ -24,8 +24,8 @@ COPY --from=build ["/src/api/connections.json", "./"]
 
 # This script is used to wait for the database to come online.  See
 # https://github.com/eficode/wait-for
-COPY ./wait-for ./
-RUN chmod +x ./wait-for \
+COPY ./wait-for.sh ./
+RUN chmod +x ./wait-for.sh \
   && apt-get update \
   && apt-get install -y -qq netcat \
   && rm -rf /var/lib/apt/lists/*
@@ -34,5 +34,5 @@ RUN chmod +x ./wait-for \
 RUN npm install -g formn-cli@1.x.x
 
 # Migrate up when the container is run.
-CMD sh -c "./wait-for -t 100 ${MYSQL_HOST}:${MYSQL_PORT} -- formn -c ./connections.json m -m migrations/formn up"
+CMD sh -c "./wait-for.sh -t 100 ${MYSQL_HOST}:${MYSQL_PORT} -- formn -c ./connections.json m -m migrations/formn up"
 
