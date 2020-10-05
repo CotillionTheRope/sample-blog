@@ -1,6 +1,6 @@
 version: "3"
 services:
-  db:
+  prod-db:
     image: percona:5.7
     ports:
       - "3306:3306"
@@ -8,19 +8,20 @@ services:
       - docker/env/db.env
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-      - percona-data:/var/lib/mysql
+      - prod-percona-data:/var/lib/mysql
 
-  dev:
+  blog-migrate:
+    image: dacheson/sample-blog-migrate:latest
+    env-file:
+      - docker/env/sample-blog-prod.env
+
+  blog:
     image: dacheson/sample-blog:latest
     env_file:
       - docker/env/sample-blog-prod.env
     ports:
       - "80:8000"
-    volumes:
-      - .:/home/node/dev
     restart: always
-    stdin_open: true
-    tty: true
 
 volumes:
-  percona-data:
+  prod-percona-data:
