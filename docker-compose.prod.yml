@@ -12,7 +12,7 @@ services:
 
   blog-migrate:
     image: dacheson/sample-blog-migrate:latest
-    env-file:
+    env_file:
       - docker/env/sample-blog-prod.env
 
   blog:
