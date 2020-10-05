@@ -33,7 +33,7 @@ function connect() {
 }
 
 async function getMigrationFiles() {
-  const files = await fs.readdir('db/migration');
+  const files = await fs.readdir('db/migrations');
 
   // Return the migration names only.
   return files
