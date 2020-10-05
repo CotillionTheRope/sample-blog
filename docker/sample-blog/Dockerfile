@@ -9,7 +9,7 @@ ARG TAG
 # 1) The sample-blog repo is cloned, then the TAG is checked out.
 # 2) Install the dependencies and build the app.
 RUN git clone https://github.com/CotillionTheRope/sample-blog.git . && \
-    git checkout develop && \
+    git checkout ${TAG} && \
     npm install && \
     npm run build
 
@@ -30,4 +30,4 @@ RUN npm install -g forever && \
 USER node
 
 EXPOSE 8000
-CMD forever --minUptime 1000 --spinSleepTime 1000 -c "npm start" .
+CMD node waitForDb.js && forever --minUptime 1000 --spinSleepTime 1000 -c "npm start" .
