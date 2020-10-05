@@ -22,6 +22,7 @@ WORKDIR /var/www/sample-blog
 # Copy the production assets
 COPY --from=build ["src/api/", "."]
 COPY --from=build ["src/build/", "./src/build/"]
+COPY --from=build ["src/waitForDB.js", "/var/www/sample-blog/"]
 
 RUN npm install -g forever && \
     npm install
@@ -30,4 +31,4 @@ RUN npm install -g forever && \
 USER node
 
 EXPOSE 8000
-CMD node waitForDb.js && forever --minUptime 1000 --spinSleepTime 1000 -c "npm start" .
+CMD node waitForDB.js && forever --minUptime 1000 --spinSleepTime 1000 -c "npm start" .
