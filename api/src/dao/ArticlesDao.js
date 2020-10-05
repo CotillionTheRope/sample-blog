@@ -50,7 +50,6 @@ class ArticlesDao {
 
     await query(db, sql, params);
 
-    console.log('added vote');
     const updatedInfo = await this.retrieveByName(db, articleName);
 
     return updatedInfo;
