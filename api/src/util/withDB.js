@@ -6,11 +6,11 @@ const withDB = async (operations, res) => {
 
   try {
     const conn = mysql.createConnection({
-      user             : 'root',
-      password         : 'r^TaOUTB386k1GZu',
-      host             : 'db',
-      database         : 'my_blog',
-      port             : 3306,
+      user             : process.env.MYSQL_USER,
+      password         : process.env.MSYQL_PASSWORD,
+      host             : process.env.MYSQL_HOST,
+      database         : process.env.MYSQL_DATABASE,
+      port             : process.env.MYSQL_PORT,
       connectionTimeout: 1000,
     });
 
