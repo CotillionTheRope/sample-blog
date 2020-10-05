@@ -34,5 +34,5 @@ RUN chmod +x ./wait-for.sh \
 RUN npm install -g formn-cli@1.x.x
 
 # Migrate up when the container is run.
-CMD sh -c "./wait-for.sh -t 100 ${MYSQL_HOST}:${MYSQL_PORT} -- formn -c ./connections.json m -m migrations/formn up"
+CMD sh -c "./wait-for.sh -t 100 ${MYSQL_HOST}:${MYSQL_PORT} -- formn -c ./connections.json m -m migrations up"
 
