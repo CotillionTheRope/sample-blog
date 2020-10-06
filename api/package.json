@@ -1,6 +1,6 @@
 {
-  "name": "my-blog-backend",
-  "version": "1.0.0",
+  "name": "sample-blog-backend",
+  "version": "2.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {

@@ -11,12 +11,12 @@ services:
       - prod-percona-data:/var/lib/mysql
 
   blog-migrate:
-    image: dacheson/sample-blog-migrate:latest
+    image: dacheson/sample-blog-migrate:2.0.1
     env_file:
       - docker/env/sample-blog-prod.env
 
   blog:
-    image: dacheson/sample-blog:latest
+    image: dacheson/sample-blog:2.0.1
     env_file:
       - docker/env/sample-blog-prod.env
     ports:
