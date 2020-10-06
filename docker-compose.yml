@@ -11,7 +11,7 @@ services:
       - percona-data:/var/lib/mysql
 
   dev:
-    image: dacheson/sample-blog-dev:latest
+    image: dacheson/sample-blog-dev:1.0.1
     env_file:
       - docker/env/sample-blog-dev.env
     ports:
